@@ -1,0 +1,336 @@
+:root {
+  --inputtextpadding: 1.1rem;
+  --bg: #212121;
+  --primary: rgb(135, 116, 225);
+  --tprimary: rgb(135, 116, 225, 0.1);
+  --placeholder: #9e9e9e;
+  --inputborder: #2f2f2f;
+  --errorcolor: #ff595a;
+  --errorborder: #e53935;
+  --margin-gap: 1.5rem;
+}
+
+* {
+  -webkit-tap-highlight-color: none;
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(77, 77, 77);
+  border-radius: 10px;
+  margin-right: 2px;
+}
+
+body {
+  background-color: var(--bg);
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  position: absolute;
+  top: 15%;
+  display: inline-block;
+  width: 100%;
+  max-width: 360px;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+}
+.input-field {
+  width: 100%;
+  position: relative;
+}
+
+.input-field > * + * {
+  margin-top: var(--margin-gap);
+}
+
+.label {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.label input {
+  background: transparent;
+  padding: var(--inputtextpadding);
+  border-radius: 10px;
+  width: 100%;
+  height: 54px;
+  outline: none;
+  font-size: 16px;
+  border: 1px solid var(--inputborder);
+  color: #fff;
+  display: block;
+}
+
+.label input:hover {
+  border-color: var(--primary);
+}
+
+.label input:focus {
+  border: 2px solid var(--primary);
+}
+
+.label .placeholder,
+.radio-placeholder {
+  font-size: 16px;
+  position: absolute;
+  width: calc(100% - (var(--inputtextpadding) * 2));
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  top: 27px;
+  left: 10px;
+  transform: translateY(-50%);
+  color: var(--placeholder);
+  transition: top 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1.3125;
+  padding: 0 5px;
+}
+.radio-placeholder {
+  top: 2px;
+  font-size: 11px;
+  background: var(--bg);
+  width: auto;
+}
+
+.label input:not(:placeholder-shown),
+.label input:focus {
+  transition-delay: 0.1s;
+}
+
+.label input:not(:placeholder-shown) + .placeholder,
+.label input:focus + .placeholder {
+  top: 2px;
+  font-size: 11px;
+  color: var(--primary);
+  background: var(--bg);
+  width: auto;
+}
+
+.label input:not(:focus) + .placeholder {
+  color: var(--placeholder);
+}
+.label input:hover + .placeholder,
+.label input:hover ~ .arrow-down {
+  color: var(--primary);
+}
+.error {
+  border-color: var(--errorborder) !important;
+  color: var(--errorcolor) !important;
+}
+
+.label .error input:not(:placeholder-shown) + .placeholder,
+.label .error:focus + .placeholder,
+.label .error:not(:focus) + .placeholder {
+  color: var(--errorborder) !important;
+}
+
+.btn {
+  border: 0;
+  outline: 0;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 19px;
+  height: auto;
+  cursor: pointer;
+  color: #fff;
+  display: block;
+  width: 100%;
+  background-color: var(--primary);
+}
+.signbtn {
+  margin-top: 1.1875rem;
+  height: 54px;
+}
+
+.radio-buttons {
+  margin-top: var(--margin-gap);
+
+  border: 1px solid var(--inputborder);
+  border-radius: 10px;
+  position: relative;
+}
+.radioinputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-group {
+  background: transparent;
+  padding: var(--inputtextpadding);
+  border-radius: 10px;
+  width: 100%;
+  height: 54px;
+  outline: none;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.form-group label {
+  cursor: pointer;
+  position: relative;
+  color: #fff;
+}
+
+.form-group label::before {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: transparent;
+  border: 2px solid var(--placeholder);
+  border-radius: 50%;
+  top: 50%;
+  left: -2rem;
+  transform: translateY(-50%);
+  transition: border-color 400ms ease;
+}
+
+.form-group label::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  top: 50%;
+  left: -2rem;
+  transform: translateY(-50%) scale(0);
+  transition: transform 400ms ease;
+}
+
+input[type="radio"]:checked + label::before {
+  border-color: var(--primary);
+}
+
+input[type="radio"]:checked ~ .form-group {
+  background: var(--tprimary);
+}
+
+input[type="radio"]:checked + label::after {
+  transform: translateY(-50%) scale(0.55);
+}
+
+.arrow-down {
+  position: absolute;
+  content: " ";
+  top: 50%;
+  bottom: 0;
+  right: 21px;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+  border: 2px solid var(--placeholder);
+  border-radius: 1px;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 5px;
+  vertical-align: middle;
+  z-index: 2;
+  margin-top: -9px;
+  transform: rotate(45deg);
+  transition: 0.2s all;
+}
+
+input:focus ~ .arrow-down {
+  margin-top: -4px;
+  transform: rotate(225deg);
+  border-color: var(--primary);
+}
+
+.label input:hover ~ .arrow-down {
+  border-color: var(--primary);
+}
+
+.select-wrapper {
+  max-height: 45vh;
+  position: absolute;
+  width: 100%;
+  top: 92%;
+  left: 0;
+  overflow: hidden;
+  background-color: rgb(33, 33, 33, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 3;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+  transform: scale(0.95);
+  transform-origin: top center;
+  opacity: 0;
+  visibility: hidden;
+
+  box-shadow: 0 8px 17px 2px #00000024, 0 3px 14px 2px #0000001f,
+    0 5px 5px -3px #0003;
+}
+.select-wrapper.active {
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.select-wrapper .scrollable {
+  position: relative;
+}
+
+.scrollable {
+  width: 100%;
+  height: 100%;
+  overflow-y: overlay;
+  overflow-x: hidden;
+  max-height: 100%;
+  position: relative;
+}
+.select-wrapper ul {
+  margin: 0.5rem 0;
+}
+
+ul:not(.browser-default) {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+ul:not(.browser-default) > li {
+  list-style-type: none;
+}
+
+.select-wrapper li {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  justify-content: space-between;
+  height: 2rem;
+  cursor: pointer;
+  text-align: start;
+  color: #aaa;
+}
+.select-wrapper li:hover {
+  background: rgb(0, 0, 0, 0.2);
+}
