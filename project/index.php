@@ -54,6 +54,7 @@
 
 
         <button class="btn signbtn" type="submit">Submit</button>
+        <a class="link" href="display.php">View Responses</a>
     </form>
     <script>
         document.getElementById("fullname").focus();
@@ -66,6 +67,7 @@
 
                 var fullname = document.getElementById("fullname").value;
                 var email = document.getElementById("email");
+                var city = document.getElementById("city");
                 var formInputs = document.querySelectorAll("#form input");
                 let emailPlaceholder = document.querySelector(".emailplaceholder");
 
@@ -109,6 +111,10 @@
                             email.classList.add("error");
                             document.querySelector(".emailplaceholder").textContent = "Email Already Exist";
                             email.focus();
+                        }else if(response === "city-not-found"){
+                            city.classList.add("error");
+                            city.focus();
+
                         } else {
                             console.log(response);
                         }
